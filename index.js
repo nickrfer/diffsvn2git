@@ -2,9 +2,8 @@ exports.parse = function(options) {
   var Client = require('svn-spawn');
   var client = new Client(options);
 
-  let lastRev;
-
   // fetch the last revision on this repo
+  let lastRev;
   let getInfoPromise = new Promise((resolve, reject) => {
       client.getInfo((err, data) => {
           lastRev = data.commit.$.revision;
@@ -12,24 +11,24 @@ exports.parse = function(options) {
       });
   });
 
-  let patch;
+
   // when get info returns, gets the log info from the last revision
+  let patch;
   let getLogPromise = new Promise((resolve, reject) => {
       getInfoPromise.then(() => {
           client.log(['-c ' + lastRev], function(err, data) {
               patch = svnLogToGitLog(data.split('\n'));
               patch += "---\n\n";
-              console.log(patch);
               resolve();
           });
       });
   });
 
+  // when get log returns, calls svn diff to finish building the patch info
   getLogPromise.then(() => {
-      console.log('getLogPromise.then');
       client.cmd(['diff', '-c ' + lastRev], function(err, data) {
           patch += svnDiffToGitDiff(data.split('\n'));
-          console.log(patch);
+          return patch;
       });
   });
 
