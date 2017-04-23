@@ -24,14 +24,6 @@ exports.parse = function(options) {
       });
   });
 
-  // when get log returns, calls svn diff to finish building the patch info
-  getLogPromise.then(() => {
-      client.cmd(['diff', '-c ' + lastRev], function(err, data) {
-          patch += svnDiffToGitDiff(data.split('\n'));
-          return patch;
-      });
-  });
-
   function svnLogToGitLog(svnlog) {
       var metainfo = svnlog[1].split(" | ");
       var subject = svnlog[2];
@@ -50,6 +42,16 @@ exports.parse = function(options) {
       return gitlog;
   }
 
+  // when get log returns, calls svn diff to finish building the patch info
+  let getDiffPromise = new Promise((resolve, reject) => {
+      getLogPromise.then(() => {
+          client.cmd(['diff', '-c ' + lastRev], function(err, data) {
+              patch += svnDiffToGitDiff(data.split('\n'));
+              return patch;
+          });
+      });
+  });
+
   function svnDiffToGitDiff(svndiff) {
     var gitDiff = '';
 
@@ -64,4 +66,6 @@ exports.parse = function(options) {
     });
     return gitDiff;
   }
+
+  return getDiffPromise;
 }
