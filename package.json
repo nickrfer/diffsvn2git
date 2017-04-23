@@ -1,6 +1,6 @@
 {
   "name": "nodejs-svn-git-diff",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Nodejs lib to convert a svn commit to a git diff.",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,7 @@
     "url": "https://github.com/nickrfer/nodejs-svn-git-diff/issues"
   },
   "homepage": "https://github.com/nickrfer/nodejs-svn-git-diff#readme",
-  "devDependencies": {
+  "dependencies": {
     "svn-spawn": "^0.1.5"
   }
 }

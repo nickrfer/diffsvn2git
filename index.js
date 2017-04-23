@@ -1,4 +1,4 @@
-exports.generate(options) {
+exports.parse = function(options) {
   var Client = require('svn-spawn');
   var client = new Client(options);
 
