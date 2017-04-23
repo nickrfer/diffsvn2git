@@ -2,9 +2,6 @@ machine:
   node:
     version: 7
 dependencies:
-  cache_directories:
-    - ~/nvm
-    - ~/.npm
   override:
     - git clean -dfx
 test:
