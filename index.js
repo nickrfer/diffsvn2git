@@ -6,27 +6,27 @@ exports.parse = function(options) {
       password: options.password,
       noAuthCache: options.noAuthCache});
 
-    // fetch the last revision on this repo
-    let getInfoPromise = new Promise((resolve, reject) => {
-        var rev = options.rev;
+    let rev = options.rev;
 
+    // fetch the last revision on this repo if the options.rev was not passed
+    let getInfoPromise = new Promise((resolve, reject) => {
         if (rev) {
+            resolve();
+        } else {
             client.getInfo((err, data) => {
                 if (data) {
-                    lastRev = data.commit.$.revision;
+                    rev = data.commit.$.revision;
                 } else {
                   console.log('Error while calling svn info: ' + err);
                 }
-                resolve(rev);
+                resolve();
             });
-        } else {
-            resolve(rev);
         }
     });
 
     // when get info returns, gets the log info from the last revision
     let getLogPromise = new Promise((resolve, reject) => {
-        getInfoPromise.then((rev) => {
+        getInfoPromise.then(() => {
 
             client.log(['-c ' + rev], function(err, data) {
                 if (data) {
@@ -62,7 +62,7 @@ exports.parse = function(options) {
     let getDiffPromise = new Promise((resolve, reject) => {
         getLogPromise.then((patch) => {
 
-            client.cmd(['diff', '-c ' + lastRev
+            client.cmd(['diff', '-c ' + rev
             ], function(err, data) {
                 if (data) {
                     patch += svnDiffToGitDiff(data.split('\n'));
