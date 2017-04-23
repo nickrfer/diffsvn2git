@@ -1,10 +1,15 @@
 {
   "name": "nodejs-svn-git-diff",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Nodejs lib to convert a svn commit to a git diff.",
-  "main": "index.js",
+  "main": "src/nodejs-svn-git-diff.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "style": "npm run lint",
+    "lint": "eslint .",
+    "codacy": "type ./coverage/lcov.info | codacy-coverage",
+    "coverage": "istanbul cover _mocha -- -u exports -R spec ./test/**/*",
+    "check-coverage": "istanbul check-coverage --statements 90 --functions 90 --branches 85 --lines 90 ./coverage/coverage.json",
+    "test": "npm run coverage && npm run check-coverage"
   },
   "repository": {
     "type": "git",
@@ -23,6 +28,16 @@
   },
   "homepage": "https://github.com/nickrfer/nodejs-svn-git-diff#readme",
   "dependencies": {
+    "mocha-lcov-reporter": "^1.3.0",
     "svn-spawn": "^0.1.5"
+  },
+  "devDependencies": {
+    "codacy-coverage": "^2.0.2",
+    "eslint": "^3.18.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^2.1.1",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "uglifyjs": "^2.4.10"
   }
 }

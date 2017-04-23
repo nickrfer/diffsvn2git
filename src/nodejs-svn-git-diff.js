@@ -1,5 +1,5 @@
 exports.parse = function(options) {
-    var Client = require('svn-spawn');
+    var Client = require("svn-spawn");
     var client = new Client({
       cwd: options.cwd,
       username: options.username,
@@ -17,7 +17,7 @@ exports.parse = function(options) {
                 if (data) {
                     rev = data.commit.$.revision;
                 } else {
-                  console.log('Error while calling svn info: ' + err);
+                  console.error("Error while calling svn info: " + err);
                 }
                 resolve();
             });
@@ -28,12 +28,12 @@ exports.parse = function(options) {
     let getLogPromise = new Promise((resolve, reject) => {
         getInfoPromise.then(() => {
 
-            client.log(['-c ' + rev], function(err, data) {
+            client.log(["-c " + rev], function(err, data) {
                 if (data) {
-                    var patch = svnLogToGitLog(data.split('\n'));
+                    var patch = svnLogToGitLog(data.split("\n"));
                     patch += "---\n\n";
                 } else {
-                    console.log('Error while calling svn log: ' + err);
+                    console.error("Error while calling svn log: " + err);
                 }
                 resolve(patch);
             });
@@ -62,12 +62,12 @@ exports.parse = function(options) {
     let getDiffPromise = new Promise((resolve, reject) => {
         getLogPromise.then((patch) => {
 
-            client.cmd(['diff', '-c ' + rev
+            client.cmd(["diff", "-c " + rev
             ], function(err, data) {
                 if (data) {
-                    patch += svnDiffToGitDiff(data.split('\n'));
+                    patch += svnDiffToGitDiff(data.split("\n"));
                 } else {
-                    console.log('Error while calling svn diff: ' + err);
+                    console.error("Error while calling svn diff: " + err);
                 }
                 resolve(patch);
             });
@@ -75,19 +75,19 @@ exports.parse = function(options) {
     });
 
     function svnDiffToGitDiff(svndiff) {
-        var gitDiff = '';
+        var gitDiff = "";
 
         svndiff.forEach((line) => {
-            if (line.startsWith('--- ')) {
-                gitDiff += '--- a/' + line.substring(4) + '\n';
-            } else if (line.startsWith('+++ ')) {
-                gitDiff += '+++ b/' + line.substring(4) + '\n';
+            if (line.startsWith("--- ")) {
+                gitDiff += "--- a/" + line.substring(4) + "\n";
+            } else if (line.startsWith("+++ ")) {
+                gitDiff += "+++ b/" + line.substring(4) + "\n";
             } else {
-                gitDiff += line + '\n';
+                gitDiff += line + "\n";
             }
         });
         return gitDiff;
     }
 
     return getDiffPromise;
-}
+};
