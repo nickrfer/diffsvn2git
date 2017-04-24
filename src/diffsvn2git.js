@@ -56,7 +56,6 @@ exports.parse = function(options) {
   // when get info returns, gets the log info from the last revision
   let getLogPromise = new Promise((resolve, reject) => {
     getInfoPromise.then(() => {
-
       client.log(['-c ' + rev], function(err, data) {
         var patch = null;
 
@@ -74,7 +73,6 @@ exports.parse = function(options) {
   // when get log returns, calls svn diff to finish building the patch info
   let getDiffPromise = new Promise((resolve, reject) => {
     getLogPromise.then((patch) => {
-
       client.cmd([
         'diff', '-c ' + rev
       ], function(err, data) {
