@@ -40,5 +40,3 @@ diffPromise.then((patch) => {
   console.log(patch);
 });
 ```
-
-
