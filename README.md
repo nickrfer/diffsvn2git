@@ -1,8 +1,6 @@
 
 # diffsvn2git
 
-[![Join the chat at https://gitter.im/diffsvn2git/Lobby](https://badges.gitter.im/diffsvn2git/Lobby.svg)](https://gitter.im/diffsvn2git/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 [![Codacy Code Badge](https://api.codacy.com/project/badge/grade/8c7b41fac91c4adf9fcaad888bbddaca)](https://www.codacy.com/app/Codacy/diffsvn2git)
 [![Circle CI](https://circleci.com/gh/nickrfer/diffsvn2git.svg?style=svg)](https://circleci.com/gh/nickrfer/diffsvn2git)
 [![Dependency Status](https://dependencyci.com/github/nickrfer/diffsvn2git/badge)](https://dependencyci.com/github/nickrfer/diffsvn2git)
