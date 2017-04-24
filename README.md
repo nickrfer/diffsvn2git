@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/nickrfer/diffsvn2git.png?label=ready&title=Ready)](https://waffle.io/nickrfer/diffsvn2git)
 
 # diffsvn2git
 
