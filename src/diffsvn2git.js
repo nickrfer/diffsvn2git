@@ -1,7 +1,6 @@
 exports.parse = function(options) {
   var Client = require('svn-spawn');
-  var client = new Client({cwd: options.cwd, username: options.username,
-    password: options.password, noAuthCache: options.noAuthCache});
+  var client = new Client({cwd: options.cwd, username: options.username, password: options.password, noAuthCache: options.noAuthCache});
 
   let rev = options.rev;
 
@@ -76,7 +75,8 @@ exports.parse = function(options) {
   let getDiffPromise = new Promise((resolve, reject) => {
     getLogPromise.then((patch) => {
 
-      client.cmd(['diff', '-c ' + rev
+      client.cmd([
+        'diff', '-c ' + rev
       ], function(err, data) {
         if (data) {
           patch += svnDiffToGitDiff(data.split('\n'));
