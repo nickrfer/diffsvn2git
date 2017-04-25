@@ -1,6 +1,6 @@
 {
   "name": "diffsvn2git",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Nodejs lib to convert a svn commit to a git diff.",
   "main": "src/diffsvn2git.js",
   "scripts": {
