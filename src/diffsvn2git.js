@@ -1,4 +1,4 @@
-var Client = require('svn-spawn');
+const Client = require('svn-spawn');
 
 class DiffSvn2Git {
 

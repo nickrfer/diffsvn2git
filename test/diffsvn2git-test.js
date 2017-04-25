@@ -1,6 +1,7 @@
-var assert = require('assert');
-var DiffSvn2Git = require('../src/diffsvn2git.js');
-var workingPath = __dirname.join('/tmp/copy');
+const assert = require('assert');
+const DiffSvn2Git = require('../src/diffsvn2git.js');
+const path = require('path');
+const workingPath = path.resolve().join('/tmp/copy');
 
 var diffSvn2git = new DiffSvn2Git({cwd: workingPath});
 
