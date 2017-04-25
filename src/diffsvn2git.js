@@ -95,7 +95,7 @@ class DiffSvn2Git {
     });
   }
 
-  parse(rev) {
+  parse(rev = null) {
     // fetch the last revision on this repo if the options.rev was not passed
     let infoPromise = this.getInfoPromise(rev);
 
