@@ -1,5 +1,5 @@
 var assert = require('assert');
-// var diff = require('../src/diffsvn2git.js');
+var diff = require('../src/diffsvn2git.js');
 
 describe('diffsvn2git', function() {
   describe('parse', function() {
