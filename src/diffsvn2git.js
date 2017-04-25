@@ -1,4 +1,8 @@
+'use strict';
 const Client = require('svn-spawn');
+
+var DiffSvn2GitModule = function() {};
+module.exports = DiffSvn2GitModule;
 
 class DiffSvn2Git {
 
