@@ -1,6 +1,6 @@
 # diffsvn2git
 
-[![Codacy Code Badge](https://api.codacy.com/project/badge/grade/8c7b41fac91c4adf9fcaad888bbddaca)](https://www.codacy.com/app/Codacy/diffsvn2git)
+[![Codacy Code Badge](https://api.codacy.com/project/badge/grade/ddb909b3f3ba4b21a20b8de2ae972215)](https://www.codacy.com/app/diffsvn2git)
 [![Circle CI](https://circleci.com/gh/nickrfer/diffsvn2git.svg?style=svg)](https://circleci.com/gh/nickrfer/diffsvn2git)
 [![Dependency Status](https://dependencyci.com/github/nickrfer/diffsvn2git/badge)](https://dependencyci.com/github/nickrfer/diffsvn2git)
 [![npm](https://img.shields.io/npm/v/diffsvn2git.svg)](https://www.npmjs.com/package/diffsvn2git)
