@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/nickrfer/diffsvn2git#readme",
   "dependencies": {
-    "mocha-lcov-reporter": "^1.3.0",
     "svn-spawn": "^0.1.5"
   },
   "devDependencies": {
@@ -33,6 +32,7 @@
     "eslint-plugin-standard": "^2.1.1",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
-    "uglifyjs": "^2.4.10"
+    "uglifyjs": "^2.4.10",
+    "mocha-lcov-reporter": "^1.3.0"
   }
 }

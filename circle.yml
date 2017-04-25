@@ -1,3 +1,6 @@
 machine:
   node:
     version: 7
+  pre:
+    - "sudo apt-get update -qq"
+    - "sudo apt-get install -qq subversion"
