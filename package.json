@@ -4,7 +4,9 @@
   "description": "Nodejs lib to convert a svn commit to a git diff.",
   "main": "src/diffsvn2git.js",
   "scripts": {
-    "test": "sh test/init.sh && mocha --timeout 15000"
+    "test": "sh test/init.sh && mocha --compilers js:babel-core/register --timeout 15000",
+    "compile": "babel -d lib/ src/",
+    "prepublish": "npm run compile"
   },
   "repository": {
     "type": "git",
@@ -22,17 +24,26 @@
     "url": "https://github.com/nickrfer/diffsvn2git/issues"
   },
   "homepage": "https://github.com/nickrfer/diffsvn2git#readme",
+  "babel": {
+    "presets": [
+      "babel-preset-es2015"
+    ]
+  },
   "dependencies": {
     "svn-spawn": "^0.1.5"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "babel-polyfill": "^6.23.0",
     "codacy-coverage": "^2.0.2",
     "eslint": "^3.18.0",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^2.1.1",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
-    "uglifyjs": "^2.4.10",
-    "mocha-lcov-reporter": "^1.3.0"
+    "mocha-lcov-reporter": "^1.3.0",
+    "uglifyjs": "^2.4.10"
   }
 }

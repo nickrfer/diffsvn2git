@@ -1,24 +1,23 @@
 'use strict';
-const Client = require('svn-spawn');
+import Client from 'svn-spawn';
 
-class DiffSvn2Git {
-
+export default class DiffSvn2Git {
   constructor(options) {
     this.client = new Client(options);
   }
 
   static svnLogToGitLog(svnlog) {
-    var metainfo = svnlog[1].split(' | ');
-    var subject = svnlog[2];
-    var description = svnlog[3];
+    let metainfo = svnlog[1].split(' | ');
+    let subject = svnlog[2];
+    let description = svnlog[3];
 
-    var author = metainfo[1];
+    let author = metainfo[1];
 
-    var day = metainfo[2].split('(')[1];
-    var time = metainfo[2].split(' ')[1];
-    var offset = metainfo[2].split(' ')[2];
+    let day = metainfo[2].split('(')[1];
+    let time = metainfo[2].split(' ')[1];
+    let offset = metainfo[2].split(' ')[2];
 
-    var gitlog = 'From: ' + author + ' <' + author + '>' + '\n';
+    let gitlog = 'From: ' + author + ' <' + author + '>' + '\n';
     gitlog += 'Date: ' + day + ' ' + time + ' ' + offset + '\n';
     gitlog += 'Subject: [PATCH] ' + subject + '\n';
     gitlog += description + '\n';
@@ -26,7 +25,7 @@ class DiffSvn2Git {
   }
 
   static svnDiffToGitDiff(svndiff) {
-    var gitDiff = '';
+    let gitDiff = '';
 
     svndiff.forEach((line) => {
       if (line.startsWith('--- ')) {
@@ -61,7 +60,7 @@ class DiffSvn2Git {
     return new Promise((resolve, reject) => {
       infoPromise.then(() => {
         this.client.log(['-c ' + this.rev], function(err, data) {
-          var patch = null;
+          let patch = null;
 
           if (data) {
             patch = DiffSvn2Git.svnLogToGitLog(data.split('\n'));
@@ -105,5 +104,3 @@ class DiffSvn2Git {
   }
 
 }
-
-module.exports = DiffSvn2Git;

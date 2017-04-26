@@ -1,9 +1,10 @@
-const assert = require('assert');
-const DiffSvn2Git = require('../src/diffsvn2git.js');
-const path = require('path');
-const workingPath = path.resolve('test/tmp/repo');
+'use strict';
+import assert from 'assert';
+import DiffSvn2Git from '../src/diffsvn2git.js';
+import path from 'path';
 
-var diffSvn2git = new DiffSvn2Git({cwd: workingPath});
+const workingPath = path.resolve('test/tmp/repo');
+let diffSvn2git = new DiffSvn2Git({cwd: workingPath});
 
 describe('diffsvn2git', function() {
   describe('parse', function() {
