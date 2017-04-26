@@ -14,7 +14,7 @@
 
 Nodejs lib to convert a svn commit revision to a git diff.
 
-[![NPM](https://nodei.co/npm/diffsvn2git.png)](https://nodei.co/npm/diffsvn2git/)
+[![NPM](https://nodei.co/npm/diffsvn2git.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/diffsvn2git/)
 
 ## Distribution
 
