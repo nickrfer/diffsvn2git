@@ -1,4 +1,3 @@
-'use strict';
 import Client from 'svn-spawn';
 
 export default class DiffSvn2Git {
@@ -7,20 +6,19 @@ export default class DiffSvn2Git {
   }
 
   static svnLogToGitLog(svnlog) {
-    let metainfo = svnlog[1].split(' | ');
-    let subject = svnlog[2];
-    let description = svnlog[3];
+    const metainfo = svnlog[1].split(' | ');
+    const subject = svnlog[2];
+    const description = svnlog[3];
 
-    let author = metainfo[1];
+    const author = metainfo[1];
+    const day = metainfo[2].split('(')[1];
+    const time = metainfo[2].split(' ')[1];
+    const offset = metainfo[2].split(' ')[2];
 
-    let day = metainfo[2].split('(')[1];
-    let time = metainfo[2].split(' ')[1];
-    let offset = metainfo[2].split(' ')[2];
-
-    let gitlog = 'From: ' + author + ' <' + author + '>' + '\n';
-    gitlog += 'Date: ' + day + ' ' + time + ' ' + offset + '\n';
-    gitlog += 'Subject: [PATCH] ' + subject + '\n';
-    gitlog += description + '\n';
+    let gitlog = `From: ${author} <${author}> \n`;
+    gitlog += `Date: ${day} ${time} ${offset} \n`;
+    gitlog += `Subject: [PATCH] ${subject} \n`;
+    gitlog += `${description} \n`;
     return gitlog;
   }
 
@@ -29,18 +27,18 @@ export default class DiffSvn2Git {
 
     svndiff.forEach((line) => {
       if (line.startsWith('--- ')) {
-        gitDiff += '--- a/' + line.substring(4) + '\n';
+        gitDiff += `--- a/${line.substring(4)} \n`;
       } else if (line.startsWith('+++ ')) {
-        gitDiff += '+++ b/' + line.substring(4) + '\n';
+        gitDiff += `+++ b/${line.substring(4)} \n`;
       } else {
-        gitDiff += line + '\n';
+        gitDiff += `${line} \n`;
       }
     });
     return gitDiff;
   }
 
   getInfoPromise() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       if (this.rev) {
         resolve();
       } else {
@@ -48,7 +46,7 @@ export default class DiffSvn2Git {
           if (data) {
             this.rev = data.commit.$.revision;
           } else {
-            console.error('Error while calling svn info: ' + err);
+            console.error(`Error while calling svn info: ${err}`);
           }
           resolve();
         });
@@ -57,35 +55,34 @@ export default class DiffSvn2Git {
   }
 
   getLogPromise(infoPromise) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       infoPromise.then(() => {
-        this.client.log(['-c ' + this.rev], function(err, data) {
+        this.client.log([`-c ${this.rev}`], (err, data) => {
           let patch = null;
 
           if (data) {
             patch = DiffSvn2Git.svnLogToGitLog(data.split('\n'));
             patch += '---\n\n';
           } else {
-            console.error('Error while calling svn log: ' + err);
+            console.error(`Error while calling svn log: ${err}`);
           }
           resolve(patch);
         });
       });
     });
-  };
+  }
 
   getDiffPromise(logPromise) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       logPromise.then((patch) => {
-        this.client.cmd([
-          'diff', '-c ' + this.rev
-        ], function(err, data) {
+        let generatedPatch = patch;
+        this.client.cmd(['diff', `-c ${this.rev}`], (err, data) => {
           if (data) {
-            patch += DiffSvn2Git.svnDiffToGitDiff(data.split('\n'));
+            generatedPatch += DiffSvn2Git.svnDiffToGitDiff(data.split('\n'));
           } else {
-            console.error('Error while calling svn diff: ' + err);
+            console.error(`Error while calling svn diff: ${err}`);
           }
-          resolve(patch);
+          resolve(generatedPatch);
         });
       });
     });
@@ -94,10 +91,10 @@ export default class DiffSvn2Git {
   parse(rev = null) {
     this.rev = rev;
     // fetch the last revision on this repo if the options.rev was not passed
-    let infoPromise = this.getInfoPromise();
+    const infoPromise = this.getInfoPromise();
 
     // when get info returns, gets the log info from the last revision
-    let logPromise = this.getLogPromise(infoPromise);
+    const logPromise = this.getLogPromise(infoPromise);
 
     // when get log returns, calls svn diff to finish building the patch info
     return this.getDiffPromise(logPromise);
