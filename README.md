@@ -7,11 +7,11 @@
 
 [![Dependency Status](https://david-dm.org/nickrfer/diffsvn2git.svg)](https://david-dm.org/nickrfer/diffsvn2git)
 [![devDependency Status](https://david-dm.org/nickrfer/diffsvn2git/dev-status.svg)](https://david-dm.org/nickrfer/diffsvn2git#info=devDependencies)
-[![npm](https://img.shields.io/npm/l/diffsvn2git.svg)]()
 
 [![npm](https://img.shields.io/npm/v/diffsvn2git.svg)](https://www.npmjs.com/package/diffsvn2git)
 [![Stories in Ready](https://badge.waffle.io/nickrfer/diffsvn2git.png?label=ready&title=Ready)](https://waffle.io/nickrfer/diffsvn2git)
 [![Join the chat at https://gitter.im/diffsvn2git/Lobby](https://badges.gitter.im/diffsvn2git/Lobby.svg)](https://gitter.im/diffsvn2git/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![npm](https://img.shields.io/npm/l/diffsvn2git.svg)]()
 
 
 Nodejs lib to convert a svn commit revision to a git diff.
