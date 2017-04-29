@@ -24,6 +24,8 @@ Nodejs lib to convert a svn commit revision to a git diff.
 
 ## Usage
 
+* initialization
+
 ```javascript
 var DiffSvn2Git = require('diffsvn2git');
 var diffSvn2Git = new DiffSvn2Git({
@@ -33,9 +35,19 @@ var diffSvn2Git = new DiffSvn2Git({
     password: 'pass', // optional if authentication not required or is already saved
     noAuthCache: true // optional, if true, username does not become the logged in user on the machine
 });
+```
 
-// The parse method reads the repository and generates a git diff from the revision passed, or the last commit's revision
-// if the revision parameter is not passed to the method. This method returns a Promise object.
+* listRevisionsByDate (work in progress)
+> Lists all the revision information by date in JSON format.
+```
+diffSvn2Git.listRevisionsByDate().then((revJson) => {
+    console.log(revJson);
+});
+```
+
+* parse
+> The parse method reads the repository and generates a git diff from the revision passed, or the last commit's revision. if the revision parameter is not passed to the method.
+```
 diffSvn2Git.parse().then((patch) => {
     console.log(patch);
 });
