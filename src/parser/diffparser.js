@@ -46,7 +46,7 @@ export default class DiffParser {
         let generatedPatch = patch;
         this.client.cmd(['diff', `-c ${this.rev}`], (err, data) => {
           if (data) {
-            generatedPatch += DiffParserUtil.svnDiffToGitDiff(data.split('\n'));
+            generatedPatch += DiffParserUtil.svnDiffToGitDiff(data.split(/\r?\n/));
           } else {
             console.error(`Error while calling svn diff: ${err}`);
           }
