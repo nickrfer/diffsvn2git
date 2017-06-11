@@ -9,11 +9,11 @@ export default class DiffSvn2Git {
   }
 
   listRevisionsByDate(dateStr) {
-    const date = new Date(dateStr);
+    const date = new Date(new Date(dateStr).getTime() + 86400000);
     const followingDay = new Date(date.getTime() + 86400000);
 
     return new Promise((resolve) => {
-      this.client.log([`-r{${dateFormat(date, 'yyyy-mm-dd')}}:{${dateFormat(followingDay, 'yyyy-mm-dd')}}`], (err, data) => {
+      this.client.getLog([`-r{${dateFormat(date, 'yyyy-mm-dd')}}:{${dateFormat(followingDay, 'yyyy-mm-dd')}}`], (err, data) => {
         if (data) {
           resolve(data);
         } else {
