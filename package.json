@@ -1,8 +1,8 @@
 {
   "name": "diffsvn2git",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "Nodejs lib to convert a svn commit to a git diff.",
-  "main": "src/diffsvn2git.js",
+  "main": "lib/diffsvn2git.js",
   "scripts": {
     "style": "npm run lint",
     "lint": "eslint .",
@@ -53,6 +53,6 @@
     "eslint-plugin-standard": "^3.0.1",
     "mocha": "^3.2.0",
     "mocha-lcov-reporter": "^1.3.0",
-    "nyc": "^10.2.0"
+    "nyc": "^10.3.2"
   }
 }

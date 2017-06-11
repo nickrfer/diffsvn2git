@@ -1,6 +1,6 @@
 import dateFormat from 'dateformat';
 import Client from 'svn-spawn';
-import DiffParser from '../src/parser/diffparser';
+import DiffParser from './parser/diffparser';
 
 export default class DiffSvn2Git {
   constructor(options) {
