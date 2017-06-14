@@ -252,6 +252,7 @@ Client.prototype.getLog = function(params, callback) {
 
   params = Spawn.joinParams(['log', '--xml'], params);
 
+  console.log('params: ', params);
   async.waterfall([
     function(callback) {
       self.session('silent', true).cmd(params, callback);
@@ -266,6 +267,7 @@ Client.prototype.getLog = function(params, callback) {
       );
     }
   ], function(err, data) {
+    console.log('data: ', data);
     if (callback) {
       if (err) {
         callback(err);
