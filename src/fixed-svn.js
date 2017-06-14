@@ -252,7 +252,6 @@ Client.prototype.getLog = function(params, callback) {
 
   params = Spawn.joinParams(['log', '--xml'], params);
 
-  console.log('params: ', params);
   async.waterfall([
     function(callback) {
       self.session('silent', true).cmd(params, callback);
@@ -267,7 +266,6 @@ Client.prototype.getLog = function(params, callback) {
       );
     }
   ], function(err, data) {
-    console.log('data: ', data);
     if (callback) {
       if (err) {
         callback(err);
@@ -279,7 +277,7 @@ Client.prototype.getLog = function(params, callback) {
             list.push(data[i].logentry);
           }
         }
-        else if(data instanceof String && data.trim() !== '' && 'logentry' in data) {
+        else if(data.logentry) {
           list.push(data.logentry);
         }
         callback(null, list);
