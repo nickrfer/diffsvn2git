@@ -9,7 +9,7 @@ const diffSvn2Git = new DiffSvn2Git({ cwd: workingPath });
 describe('diffsvn2git', () => {
   describe('listRevisionsByDate', () => {
     it('should list the svn working copy revisions by the date informed', () => {
-      return diffSvn2Git.listRevisionsByDate('2015-04-12').then((revisions) => {
+      return diffSvn2Git.listRevisionsByDate('2015-04-11').then((revisions) => {
         console.log(revisions);
         assert(revisions != null);
       });
