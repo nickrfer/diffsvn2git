@@ -17,7 +17,6 @@ export default class DiffSvn2Git {
 
   getLogByDate(date, followingDay) {
     return new Promise((resolve) => {
-      console.log('calling getLog');
       this.client.getLog([`-r{${dateFormat(date, 'yyyy-mm-dd')}}:{${dateFormat(followingDay, 'yyyy-mm-dd')}}`], (err, data) => {
         if (data) {
           resolve(data);

@@ -1,6 +1,6 @@
 {
   "name": "diffsvn2git",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "Nodejs lib to convert a svn commit to a git diff.",
   "main": "lib/diffsvn2git.js",
   "scripts": {
@@ -35,17 +35,18 @@
   },
   "dependencies": {
     "dateformat": "^2.0.0",
-    "svn-spawn": "^0.1.5"
+    "svn-spawn": "^0.1.5",
+    "easy-spawn": "0.0.2",
+    "xml2js": "^0.4.17",
+    "async": "^2.4.1"
   },
   "devDependencies": {
-    "async": "^2.4.1",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
     "babel-polyfill": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-register": "^6.24.1",
     "codacy-coverage": "^2.0.2",
-    "easy-spawn": "0.0.2",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "2.2.0",
@@ -55,7 +56,6 @@
     "eslint-plugin-standard": "^3.0.1",
     "mocha": "^3.2.0",
     "mocha-lcov-reporter": "^1.3.0",
-    "nyc": "^10.3.2",
-    "xml2js": "^0.4.17"
+    "nyc": "^10.3.2"
   }
 }
