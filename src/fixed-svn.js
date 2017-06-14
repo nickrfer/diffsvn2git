@@ -1,3 +1,7 @@
+/* Overriden svn.js from:
+  https://github.com/ddliu/node-svn-spawn/blob/master/lib/svn.js
+   , in order to fix a bug in getLog method. */
+
 import Spawn from 'easy-spawn';
 import util from 'util';
 import xml2js from 'xml2js';
