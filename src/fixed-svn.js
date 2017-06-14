@@ -273,7 +273,7 @@ Client.prototype.getLog = function(params, callback) {
             list.push(data[i].logentry);
           }
         }
-        else if(data.trim() !== '' && 'logentry' in data) {
+        else if(data instanceof String && data.trim() !== '' && 'logentry' in data) {
           list.push(data.logentry);
         }
         callback(null, list);
