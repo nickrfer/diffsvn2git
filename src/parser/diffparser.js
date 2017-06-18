@@ -23,7 +23,7 @@ export default class DiffParser {
   createDiffPromise(infoPromise) {
     return new Promise((resolve) => {
       infoPromise.then(() => {
-        this.client.cmd(['diff', '--git', `-r ${this.rev}`], (err, data) => {
+        this.client.cmd(['diff', '--git', `-c ${this.rev}`], (err, data) => {
           if (data) {
             resolve(data);
           } else {
