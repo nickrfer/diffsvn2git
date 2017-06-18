@@ -1,5 +1,3 @@
-import DiffParserUtil from '../parser/diffparser-util';
-
 export default class DiffParser {
   constructor(client) {
     this.client = client;
@@ -22,35 +20,15 @@ export default class DiffParser {
     });
   }
 
-  createLogPromise(infoPromise) {
+  createDiffPromise(infoPromise) {
     return new Promise((resolve) => {
       infoPromise.then(() => {
-        this.client.log([`-c ${this.rev}`], (err, data) => {
-          let patch = null;
-
+        this.client.cmd(['diff', '--git', `-r ${this.rev}`], (err, data) => {
           if (data) {
-            patch = DiffParserUtil.svnLogToGitLog(data.split('\n'));
-            patch += '---\n\n';
-          } else {
-            console.error(`Error while calling svn log: ${err}`);
-          }
-          resolve(patch);
-        });
-      });
-    });
-  }
-
-  createDiffPromise(logPromise) {
-    return new Promise((resolve) => {
-      logPromise.then((patch) => {
-        let generatedPatch = patch;
-        this.client.cmd(['diff', `-c ${this.rev}`], (err, data) => {
-          if (data) {
-            generatedPatch += DiffParserUtil.svnDiffToGitDiff(data.split(/\r?\n/));
+            resolve(data);
           } else {
             console.error(`Error while calling svn diff: ${err}`);
           }
-          resolve(generatedPatch);
         });
       });
     });
@@ -61,10 +39,7 @@ export default class DiffParser {
     // fetch the last revision on this repo if the options.rev was not passed
     const infoPromise = this.createInfoPromise();
 
-    // when get info returns, gets the log info from the last revision
-    const logPromise = this.createLogPromise(infoPromise);
-
-    // when get log returns, calls svn diff to finish building the patch info
-    return this.createDiffPromise(logPromise);
+    // when get info returns, calls svn diff to finish building the patch info
+    return this.createDiffPromise(infoPromise);
   }
 }
