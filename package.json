@@ -1,12 +1,12 @@
 {
   "name": "diffsvn2git",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Nodejs lib to convert a svn commit to a git diff.",
   "main": "lib/diffsvn2git.js",
   "scripts": {
     "style": "npm run lint",
     "lint": "eslint .",
-    "coverage": "nyc --require babel-core/register --reporter=lcov mocha --compilers js:babel-core/register --timeout 15000",
+    "coverage": "nyc --require babel-core/register --reporter=lcov mocha --compilers js:babel-core/register --timeout 90000",
     "test": "sh test/init.sh && npm run coverage && npm run codacy",
     "codacy": "cat ./coverage/lcov.info | codacy-coverage && rm -rf coverage",
     "compile": "babel -d lib/ src/",
